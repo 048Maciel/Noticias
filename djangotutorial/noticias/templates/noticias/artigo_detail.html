@@ -1,0 +1,22 @@
+{% extends 'noticias/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 1rem;">{{ artigo.titulo }}</h1>
+    <div class="card-meta" style="margin-bottom: 1.5rem;">
+        📅 Publicado em {{ artigo.data_publicacao|date:"d/m/Y H:i" }}
+    </div>
+    <div class="card-text" style="font-size: 1.1rem; line-height: 1.8;">
+        {{ artigo.corpo|linebreaks }}
+    </div>
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'noticias:comentarios' artigo.pk %}" class="btn btn-comentario">
+            💬 Ver comentários ({{ artigo.comentarios.count }})
+        </a>
+    </div>
+</div>
+
+<div style="margin-top: 1rem;">
+    <a href="{% url 'noticias:artigo_list' %}" class="btn">← Voltar para notícias</a>
+</div>
+{% endblock %}

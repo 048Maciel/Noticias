@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 Jornal Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            color: #2d3748;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb4d);
+            background-size: 200% 200%;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .home-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Mensagens */
+        .messages {
+            max-width: 1200px;
+            margin: 1rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background: #48bb78;
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title a {
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .card-title a:hover {
+            color: #b21f1f;
+        }
+
+        .card-meta {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #1a2a6c;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #b21f1f;
+        }
+
+        .btn-comentario {
+            background: #fdbb4d;
+            color: #1a2a6c;
+            margin-top: 1rem;
+        }
+
+        .btn-comentario:hover {
+            background: #f0a500;
+        }
+
+        .comentario-card {
+            background: #f7fafc;
+            border-left: 4px solid #fdbb4d;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2d3748;
+            color: #a0aec0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="{% url 'noticias:artigo_list' %}">
+                    📰 <span>Jornal Online</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'noticias:artigo_list' %}" class="home-btn">🏠 Home</a></li>
+                <li><a href="/admin/">🔐 Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>📰 Jornal Online | Todos os artigos são de domínio público | Django Project</p>
+    </footer>
+</body>
+</html>

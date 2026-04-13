@@ -1,0 +1,44 @@
+{% extends 'noticias/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 0.5rem;">📝 {{ artigo.titulo }}</h1>
+    <div class="card-meta" style="margin-bottom: 1.5rem;">
+        💬 Comentários dos leitores
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+        <h3>✏️ Deixar comentário</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.texto }}
+            </div>
+            <button type="submit" class="btn">📨 Publicar comentário</button>
+        </form>
+    </div>
+
+    <hr style="margin: 2rem 0;">
+
+    <h3>🗣️ Comentários ({{ comentarios|length }})</h3>
+    
+    {% for comentario in comentarios %}
+    <div class="card comentario-card">
+        <div class="card-meta">
+            🕒 {{ comentario.data_criacao|date:"d/m/Y H:i" }}
+        </div>
+        <div class="card-text">
+            {{ comentario.texto|linebreaks }}
+        </div>
+    </div>
+    {% empty %}
+    <div class="card">
+        <p>💭 Ainda não há comentários. Sê o primeiro a comentar!</p>
+    </div>
+    {% endfor %}
+
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'noticias:artigo_detail' artigo.pk %}" class="btn">← Voltar ao artigo</a>
+    </div>
+</div>
+{% endblock %}

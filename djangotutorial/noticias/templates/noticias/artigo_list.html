@@ -1,0 +1,24 @@
+{% extends 'noticias/base.html' %}
+
+{% block content %}
+<h1 style="margin-bottom: 2rem; font-size: 2rem;">📌 Últimas Notícias</h1>
+
+{% for artigo in artigos %}
+<div class="card">
+    <div class="card-title">
+        <a href="{% url 'noticias:artigo_detail' artigo.pk %}">{{ artigo.titulo }}</a>
+    </div>
+    <div class="card-meta">
+        📅 {{ artigo.data_publicacao|date:"d/m/Y H:i" }}
+    </div>
+    <div class="card-text">
+        {{ artigo.corpo|truncatewords:30 }}
+    </div>
+    <a href="{% url 'noticias:artigo_detail' artigo.pk %}" class="btn">📖 Ler mais</a>
+</div>
+{% empty %}
+<div class="card">
+    <p>Nenhum artigo publicado ainda. Acede ao <strong>/admin</strong> para criar artigos.</p>
+</div>
+{% endfor %}
+{% endblock %}

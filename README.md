@@ -1,6 +1,6 @@
 # Meu Jornal Django
 
-Este projeto foi desenvolvido por Lucas Gehrke como trabalho de ASI II.
+Este projeto foi desenvolvido por Lucas Gehrke e Francisco Soares como trabalho de ASI II.
 
 ## O que aprendi
 - Criar modelos no Django
